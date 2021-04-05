@@ -6,6 +6,15 @@ index 000000000..23ac65ee5
 @@ -0,0 +1,2 @@
 +# specific for windows script files
 +*.bat text eol=crlf
+diff --git a/RnDiffApp/.editorconfig b/RnDiffApp/.editorconfig
+new file mode 100644
+index 000000000..7c286132f
+--- /dev/null
++++ b/RnDiffApp/.editorconfig
+@@ -0,0 +1,3 @@
++# Windows files
++[*.bat]
++end_of_line = crlf
 diff --git a/RnDiffApp/.flowconfig b/RnDiffApp/.flowconfig
 index 786366c4f..315f2747b 100644
 --- a/RnDiffApp/.flowconfig
@@ -257,15 +266,6 @@ index 23cd158d8..f85f38d87 100644
  });
  
  export default App;
-diff --git a/RnDiffApp/.editorconfig b/RnDiffApp/.editorconfig
-new file mode 100644
-index 000000000..7c286132f
---- /dev/null
-+++ b/RnDiffApp/.editorconfig
-@@ -0,0 +1,3 @@
-+# Windows files
-+[*.bat]
-+end_of_line = crlf
 diff --git a/RnDiffApp/android/app/build.gradle b/RnDiffApp/android/app/build.gradle
 index ae67f6005..fbb86bd32 100644
 --- a/RnDiffApp/android/app/build.gradle
@@ -1560,7 +1560,8 @@ index e5f9f984a..387c32ccc 100644
 -  pod 'React-RCTText', :path => '../node_modules/react-native/Libraries/Text'
 -  pod 'React-RCTVibration', :path => '../node_modules/react-native/Libraries/Vibration'
 -  pod 'React-Core/RCTWebSocket', :path => '../node_modules/react-native/'
--
++  config = use_native_modules!
+ 
 -  pod 'React-cxxreact', :path => '../node_modules/react-native/ReactCommon/cxxreact'
 -  pod 'React-jsi', :path => '../node_modules/react-native/ReactCommon/jsi'
 -  pod 'React-jsiexecutor', :path => '../node_modules/react-native/ReactCommon/jsiexecutor'
@@ -1568,8 +1569,7 @@ index e5f9f984a..387c32ccc 100644
 -  pod 'ReactCommon/callinvoker', :path => "../node_modules/react-native/ReactCommon"
 -  pod 'ReactCommon/turbomodule/core', :path => "../node_modules/react-native/ReactCommon"
 -  pod 'Yoga', :path => '../node_modules/react-native/ReactCommon/yoga', :modular_headers => true
-+  config = use_native_modules!
- 
+-
 -  pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
 -  pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
 -  pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
@@ -1591,22 +1591,22 @@ index e5f9f984a..387c32ccc 100644
    # Note that if you have use_frameworks! enabled, Flipper will not work and
 -  # you should disable these next few lines.
 -  add_flipper_pods!
--  post_install do |installer|
++  # you should disable the next line.
++  use_flipper!()
++
+   post_install do |installer|
 -    flipper_post_install(installer)
--  end
++    react_native_post_install(installer)
+   end
 -end
 -
 -target 'RnDiffApp-tvOS' do
 -  # Pods for RnDiffApp-tvOS
-+  # you should disable the next line.
-+  use_flipper!()
- 
+-
 -  target 'RnDiffApp-tvOSTests' do
 -    inherit! :search_paths
 -    # Pods for testing
-+  post_install do |installer|
-+    react_native_post_install(installer)
-   end
+-  end
 -end
 +end
 \ No newline at end of file
@@ -1700,7 +1700,7 @@ index 886825ccc..000000000
 -</dict>
 -</plist>
 diff --git a/RnDiffApp/ios/RnDiffApp.xcodeproj/project.pbxproj b/RnDiffApp/ios/RnDiffApp.xcodeproj/project.pbxproj
-index 38e68311c..cb8f5e8c5 100644
+index 38e68311c..dca6876df 100644
 --- a/RnDiffApp/ios/RnDiffApp.xcodeproj/project.pbxproj
 +++ b/RnDiffApp/ios/RnDiffApp.xcodeproj/project.pbxproj
 @@ -3,23 +3,17 @@
@@ -1713,7 +1713,6 @@ index 38e68311c..cb8f5e8c5 100644
  
  /* Begin PBXBuildFile section */
  		00E356F31AD99517003FC87E /* RnDiffAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* RnDiffAppTests.m */; };
-+		07F5C935D5C2E5DCEDFDE6DD /* libPods-RnDiffApp-RnDiffAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0975AD63C0115DBB9B3CBB1A /* libPods-RnDiffApp-RnDiffAppTests.a */; };
  		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 -		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
  		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
@@ -1726,7 +1725,8 @@ index 38e68311c..cb8f5e8c5 100644
 -		9F6682C97A0D102EC6C12723 /* libPods-RnDiffApp-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADB3A307F50E7EE59F7DD547 /* libPods-RnDiffApp-tvOS.a */; };
 -		B8A01E19303DD7B846F1DD3E /* libPods-RnDiffApp-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0D5E89809F7969EB44199B1 /* libPods-RnDiffApp-tvOSTests.a */; };
 -		F5978AA59AC4795DBBE01356 /* libPods-RnDiffApp-RnDiffAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD0374F4A813D76EEB0862BF /* libPods-RnDiffApp-RnDiffAppTests.a */; };
-+		279FD249E48EB6A611FA9632 /* libPods-RnDiffApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D080531B78B77308EB3DA755 /* libPods-RnDiffApp.a */; };
++		260B9AD98D13E4A5DB50AD5F /* libPods-RnDiffApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4B2DAF10BE01285B31FF09 /* libPods-RnDiffApp.a */; };
++		7D33ED9F42769B5D455D0219 /* libPods-RnDiffApp-RnDiffAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46877631109448FD2A87626B /* libPods-RnDiffApp-RnDiffAppTests.a */; };
 +		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
  /* End PBXBuildFile section */
  
@@ -1751,7 +1751,6 @@ index 38e68311c..cb8f5e8c5 100644
  		00E356F21AD99517003FC87E /* RnDiffAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RnDiffAppTests.m; sourceTree = "<group>"; };
 -		04A1A0764B621DAADCCF9C84 /* Pods-RnDiffApp-RnDiffAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RnDiffApp-RnDiffAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RnDiffApp-RnDiffAppTests/Pods-RnDiffApp-RnDiffAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 -		060D968A84A9D32E8CB34AC0 /* libPods-RnDiffApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RnDiffApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-+		0975AD63C0115DBB9B3CBB1A /* libPods-RnDiffApp-RnDiffAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RnDiffApp-RnDiffAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
  		13B07F961A680F5B00A75B9A /* RnDiffApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RnDiffApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
  		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = RnDiffApp/AppDelegate.h; sourceTree = "<group>"; };
  		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = RnDiffApp/AppDelegate.m; sourceTree = "<group>"; };
@@ -1770,12 +1769,13 @@ index 38e68311c..cb8f5e8c5 100644
 -		B89336E27B33657626E060F0 /* Pods-RnDiffApp-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RnDiffApp-tvOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RnDiffApp-tvOSTests/Pods-RnDiffApp-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 -		CD0374F4A813D76EEB0862BF /* libPods-RnDiffApp-RnDiffAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RnDiffApp-RnDiffAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 -		D0D5E89809F7969EB44199B1 /* libPods-RnDiffApp-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RnDiffApp-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-+		1815FF863A828443D734E8E6 /* Pods-RnDiffApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RnDiffApp.release.xcconfig"; path = "Target Support Files/Pods-RnDiffApp/Pods-RnDiffApp.release.xcconfig"; sourceTree = "<group>"; };
-+		618E49A71BB7628ECF5C445C /* Pods-RnDiffApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RnDiffApp.debug.xcconfig"; path = "Target Support Files/Pods-RnDiffApp/Pods-RnDiffApp.debug.xcconfig"; sourceTree = "<group>"; };
-+		726D0C184EA633DB3F43BB74 /* Pods-RnDiffApp-RnDiffAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RnDiffApp-RnDiffAppTests.debug.xcconfig"; path = "Target Support Files/Pods-RnDiffApp-RnDiffAppTests/Pods-RnDiffApp-RnDiffAppTests.debug.xcconfig"; sourceTree = "<group>"; };
-+		781280C0B14A16637BD70EE9 /* Pods-RnDiffApp-RnDiffAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RnDiffApp-RnDiffAppTests.release.xcconfig"; path = "Target Support Files/Pods-RnDiffApp-RnDiffAppTests/Pods-RnDiffApp-RnDiffAppTests.release.xcconfig"; sourceTree = "<group>"; };
++		33813EF42DD024A9164E7225 /* Pods-RnDiffApp-RnDiffAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RnDiffApp-RnDiffAppTests.release.xcconfig"; path = "Target Support Files/Pods-RnDiffApp-RnDiffAppTests/Pods-RnDiffApp-RnDiffAppTests.release.xcconfig"; sourceTree = "<group>"; };
++		46877631109448FD2A87626B /* libPods-RnDiffApp-RnDiffAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RnDiffApp-RnDiffAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
++		54A696DD9F0C20CABD2A7F62 /* Pods-RnDiffApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RnDiffApp.release.xcconfig"; path = "Target Support Files/Pods-RnDiffApp/Pods-RnDiffApp.release.xcconfig"; sourceTree = "<group>"; };
++		7D4B2DAF10BE01285B31FF09 /* libPods-RnDiffApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RnDiffApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 +		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = RnDiffApp/LaunchScreen.storyboard; sourceTree = "<group>"; };
-+		D080531B78B77308EB3DA755 /* libPods-RnDiffApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RnDiffApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
++		A36156200A52224E6992E041 /* Pods-RnDiffApp-RnDiffAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RnDiffApp-RnDiffAppTests.debug.xcconfig"; path = "Target Support Files/Pods-RnDiffApp-RnDiffAppTests/Pods-RnDiffApp-RnDiffAppTests.debug.xcconfig"; sourceTree = "<group>"; };
++		AC9C31B0A485CD3FED8258FD /* Pods-RnDiffApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RnDiffApp.debug.xcconfig"; path = "Target Support Files/Pods-RnDiffApp/Pods-RnDiffApp.debug.xcconfig"; sourceTree = "<group>"; };
  		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 -		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 -		FC8792B820DF85134625F886 /* Pods-RnDiffApp-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RnDiffApp-tvOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RnDiffApp-tvOSTests/Pods-RnDiffApp-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -1787,7 +1787,7 @@ index 38e68311c..cb8f5e8c5 100644
  			buildActionMask = 2147483647;
  			files = (
 -				F5978AA59AC4795DBBE01356 /* libPods-RnDiffApp-RnDiffAppTests.a in Frameworks */,
-+				07F5C935D5C2E5DCEDFDE6DD /* libPods-RnDiffApp-RnDiffAppTests.a in Frameworks */,
++				7D33ED9F42769B5D455D0219 /* libPods-RnDiffApp-RnDiffAppTests.a in Frameworks */,
  			);
  			runOnlyForDeploymentPostprocessing = 0;
  		};
@@ -1812,7 +1812,7 @@ index 38e68311c..cb8f5e8c5 100644
 -			buildActionMask = 2147483647;
 -			files = (
 -				B8A01E19303DD7B846F1DD3E /* libPods-RnDiffApp-tvOSTests.a in Frameworks */,
-+				279FD249E48EB6A611FA9632 /* libPods-RnDiffApp.a in Frameworks */,
++				260B9AD98D13E4A5DB50AD5F /* libPods-RnDiffApp.a in Frameworks */,
  			);
  			runOnlyForDeploymentPostprocessing = 0;
  		};
@@ -1830,7 +1830,7 @@ index 38e68311c..cb8f5e8c5 100644
  				13B07FB71A68108700A75B9A /* main.m */,
  			);
  			name = RnDiffApp;
-@@ -140,28 +100,22 @@
+@@ -140,30 +100,12 @@
  			isa = PBXGroup;
  			children = (
  				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
@@ -1839,16 +1839,15 @@ index 38e68311c..cb8f5e8c5 100644
 -				CD0374F4A813D76EEB0862BF /* libPods-RnDiffApp-RnDiffAppTests.a */,
 -				ADB3A307F50E7EE59F7DD547 /* libPods-RnDiffApp-tvOS.a */,
 -				D0D5E89809F7969EB44199B1 /* libPods-RnDiffApp-tvOSTests.a */,
-+				D080531B78B77308EB3DA755 /* libPods-RnDiffApp.a */,
-+				0975AD63C0115DBB9B3CBB1A /* libPods-RnDiffApp-RnDiffAppTests.a */,
++				7D4B2DAF10BE01285B31FF09 /* libPods-RnDiffApp.a */,
++				46877631109448FD2A87626B /* libPods-RnDiffApp-RnDiffAppTests.a */,
  			);
  			name = Frameworks;
  			sourceTree = "<group>";
  		};
 -		55D453640ACDF103366261CE /* Pods */ = {
-+		4CD84E388EE340B862C8FB72 /* Pods */ = {
- 			isa = PBXGroup;
- 			children = (
+-			isa = PBXGroup;
+-			children = (
 -				6E9E14A2EADC26747EC36AE6 /* Pods-RnDiffApp.debug.xcconfig */,
 -				261AA02F069707392054BE8D /* Pods-RnDiffApp.release.xcconfig */,
 -				04A1A0764B621DAADCCF9C84 /* Pods-RnDiffApp-RnDiffAppTests.debug.xcconfig */,
@@ -1857,26 +1856,23 @@ index 38e68311c..cb8f5e8c5 100644
 -				A8E06025BDA7EF8A9BB92683 /* Pods-RnDiffApp-tvOS.release.xcconfig */,
 -				B89336E27B33657626E060F0 /* Pods-RnDiffApp-tvOSTests.debug.xcconfig */,
 -				FC8792B820DF85134625F886 /* Pods-RnDiffApp-tvOSTests.release.xcconfig */,
-+				618E49A71BB7628ECF5C445C /* Pods-RnDiffApp.debug.xcconfig */,
-+				1815FF863A828443D734E8E6 /* Pods-RnDiffApp.release.xcconfig */,
-+				726D0C184EA633DB3F43BB74 /* Pods-RnDiffApp-RnDiffAppTests.debug.xcconfig */,
-+				781280C0B14A16637BD70EE9 /* Pods-RnDiffApp-RnDiffAppTests.release.xcconfig */,
- 			);
- 			name = Pods;
-+			path = Pods;
- 			sourceTree = "<group>";
- 		};
+-			);
+-			name = Pods;
+-			sourceTree = "<group>";
+-		};
  		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
-@@ -179,7 +133,7 @@
+ 			isa = PBXGroup;
+ 			children = (
+@@ -179,7 +121,7 @@
  				00E356EF1AD99517003FC87E /* RnDiffAppTests */,
  				83CBBA001A601CBA00E9B192 /* Products */,
  				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 -				55D453640ACDF103366261CE /* Pods */,
-+				4CD84E388EE340B862C8FB72 /* Pods */,
++				99EC9317C4F708DD58B76637 /* Pods */,
  			);
  			indentWidth = 2;
  			sourceTree = "<group>";
-@@ -191,8 +145,6 @@
+@@ -191,12 +133,22 @@
  			children = (
  				13B07F961A680F5B00A75B9A /* RnDiffApp.app */,
  				00E356EE1AD99517003FC87E /* RnDiffAppTests.xctest */,
@@ -1885,17 +1881,33 @@ index 38e68311c..cb8f5e8c5 100644
  			);
  			name = Products;
  			sourceTree = "<group>";
+ 		};
++		99EC9317C4F708DD58B76637 /* Pods */ = {
++			isa = PBXGroup;
++			children = (
++				AC9C31B0A485CD3FED8258FD /* Pods-RnDiffApp.debug.xcconfig */,
++				54A696DD9F0C20CABD2A7F62 /* Pods-RnDiffApp.release.xcconfig */,
++				A36156200A52224E6992E041 /* Pods-RnDiffApp-RnDiffAppTests.debug.xcconfig */,
++				33813EF42DD024A9164E7225 /* Pods-RnDiffApp-RnDiffAppTests.release.xcconfig */,
++			);
++			name = Pods;
++			path = Pods;
++			sourceTree = "<group>";
++		};
+ /* End PBXGroup section */
+ 
+ /* Begin PBXNativeTarget section */
 @@ -204,10 +156,12 @@
  			isa = PBXNativeTarget;
  			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "RnDiffAppTests" */;
  			buildPhases = (
 -				51999F91B6C31BEEAE1C2129 /* [CP] Check Pods Manifest.lock */,
-+				29BD247C0086920A95C7B497 /* [CP] Check Pods Manifest.lock */,
++				08A37EBF0C9E6431BAC06FE0 /* [CP] Check Pods Manifest.lock */,
  				00E356EA1AD99517003FC87E /* Sources */,
  				00E356EB1AD99517003FC87E /* Frameworks */,
  				00E356EC1AD99517003FC87E /* Resources */,
-+				B6CB9268306F99E9F86EBD1E /* [CP] Embed Pods Frameworks */,
-+				48F1A134ECEEFA8F06CA9A0F /* [CP] Copy Pods Resources */,
++				4726A09693FAD867E31C8AF0 /* [CP] Embed Pods Frameworks */,
++				EAEA9511D18CEA5023F95752 /* [CP] Copy Pods Resources */,
  			);
  			buildRules = (
  			);
@@ -1904,14 +1916,14 @@ index 38e68311c..cb8f5e8c5 100644
  			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "RnDiffApp" */;
  			buildPhases = (
 -				1DC839A4BAF06697082B3DD8 /* [CP] Check Pods Manifest.lock */,
-+				231AD7C5FE9E49D02203CF08 /* [CP] Check Pods Manifest.lock */,
++				C70BEE28A564E889B8CCEDEC /* [CP] Check Pods Manifest.lock */,
  				FD10A7F022414F080027D42C /* Start Packager */,
  				13B07F871A680F5B00A75B9A /* Sources */,
  				13B07F8C1A680F5B00A75B9A /* Frameworks */,
  				13B07F8E1A680F5B00A75B9A /* Resources */,
  				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-+				701788BD43D1B08CA088E4A1 /* [CP] Embed Pods Frameworks */,
-+				8DBE55EE6E7CABBBF097A5DA /* [CP] Copy Pods Resources */,
++				D0A1525672FE856F18E5829F /* [CP] Embed Pods Frameworks */,
++				EDB36F37EA37ECDC065B074E /* [CP] Copy Pods Resources */,
  			);
  			buildRules = (
  			);
@@ -2024,7 +2036,7 @@ index 38e68311c..cb8f5e8c5 100644
  			);
  			runOnlyForDeploymentPostprocessing = 0;
  		};
-@@ -372,9 +263,9 @@
+@@ -372,45 +263,9 @@
  			);
  			runOnlyForDeploymentPostprocessing = 0;
  			shellPath = /bin/sh;
@@ -2032,68 +2044,86 @@ index 38e68311c..cb8f5e8c5 100644
 +			shellScript = "set -e\n\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
  		};
 -		1DC839A4BAF06697082B3DD8 /* [CP] Check Pods Manifest.lock */ = {
-+		231AD7C5FE9E49D02203CF08 /* [CP] Check Pods Manifest.lock */ = {
- 			isa = PBXShellScriptBuildPhase;
- 			buildActionMask = 2147483647;
- 			files = (
-@@ -396,106 +287,97 @@
- 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
- 			showEnvVarsInLog = 0;
- 		};
--		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
-+		29BD247C0086920A95C7B497 /* [CP] Check Pods Manifest.lock */ = {
- 			isa = PBXShellScriptBuildPhase;
- 			buildActionMask = 2147483647;
- 			files = (
- 			);
-+			inputFileListPaths = (
-+			);
- 			inputPaths = (
-+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-+				"${PODS_ROOT}/Manifest.lock",
-+			);
-+			name = "[CP] Check Pods Manifest.lock";
-+			outputFileListPaths = (
- 			);
--			name = "Bundle React Native Code And Images";
- 			outputPaths = (
-+				"$(DERIVED_FILE_DIR)/Pods-RnDiffApp-RnDiffAppTests-checkManifestLockResult.txt",
- 			);
- 			runOnlyForDeploymentPostprocessing = 0;
- 			shellPath = /bin/sh;
--			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
-+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-+			showEnvVarsInLog = 0;
- 		};
--		51999F91B6C31BEEAE1C2129 /* [CP] Check Pods Manifest.lock */ = {
-+		48F1A134ECEEFA8F06CA9A0F /* [CP] Copy Pods Resources */ = {
- 			isa = PBXShellScriptBuildPhase;
- 			buildActionMask = 2147483647;
- 			files = (
- 			);
- 			inputFileListPaths = (
-+				"${PODS_ROOT}/Target Support Files/Pods-RnDiffApp-RnDiffAppTests/Pods-RnDiffApp-RnDiffAppTests-resources-${CONFIGURATION}-input-files.xcfilelist",
- 			);
+-			isa = PBXShellScriptBuildPhase;
+-			buildActionMask = 2147483647;
+-			files = (
+-			);
+-			inputFileListPaths = (
+-			);
 -			inputPaths = (
 -				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 -				"${PODS_ROOT}/Manifest.lock",
 -			);
 -			name = "[CP] Check Pods Manifest.lock";
-+			name = "[CP] Copy Pods Resources";
- 			outputFileListPaths = (
+-			outputFileListPaths = (
 -			);
 -			outputPaths = (
--				"$(DERIVED_FILE_DIR)/Pods-RnDiffApp-RnDiffAppTests-checkManifestLockResult.txt",
-+				"${PODS_ROOT}/Target Support Files/Pods-RnDiffApp-RnDiffAppTests/Pods-RnDiffApp-RnDiffAppTests-resources-${CONFIGURATION}-output-files.xcfilelist",
- 			);
- 			runOnlyForDeploymentPostprocessing = 0;
- 			shellPath = /bin/sh;
+-				"$(DERIVED_FILE_DIR)/Pods-RnDiffApp-checkManifestLockResult.txt",
+-			);
+-			runOnlyForDeploymentPostprocessing = 0;
+-			shellPath = /bin/sh;
 -			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RnDiffApp-RnDiffAppTests/Pods-RnDiffApp-RnDiffAppTests-resources.sh\"\n";
+-			showEnvVarsInLog = 0;
+-		};
+-		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
+-			isa = PBXShellScriptBuildPhase;
+-			buildActionMask = 2147483647;
+-			files = (
+-			);
+-			inputPaths = (
+-			);
+-			name = "Bundle React Native Code And Images";
+-			outputPaths = (
+-			);
+-			runOnlyForDeploymentPostprocessing = 0;
+-			shellPath = /bin/sh;
+-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+-		};
+-		51999F91B6C31BEEAE1C2129 /* [CP] Check Pods Manifest.lock */ = {
++		08A37EBF0C9E6431BAC06FE0 /* [CP] Check Pods Manifest.lock */ = {
+ 			isa = PBXShellScriptBuildPhase;
+ 			buildActionMask = 2147483647;
+ 			files = (
+@@ -432,7 +287,24 @@
+ 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
  			showEnvVarsInLog = 0;
  		};
 -		586F0FC59F314A170122AE6D /* [CP] Check Pods Manifest.lock */ = {
-+		701788BD43D1B08CA088E4A1 /* [CP] Embed Pods Frameworks */ = {
++		4726A09693FAD867E31C8AF0 /* [CP] Embed Pods Frameworks */ = {
++			isa = PBXShellScriptBuildPhase;
++			buildActionMask = 2147483647;
++			files = (
++			);
++			inputFileListPaths = (
++				"${PODS_ROOT}/Target Support Files/Pods-RnDiffApp-RnDiffAppTests/Pods-RnDiffApp-RnDiffAppTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
++			);
++			name = "[CP] Embed Pods Frameworks";
++			outputFileListPaths = (
++				"${PODS_ROOT}/Target Support Files/Pods-RnDiffApp-RnDiffAppTests/Pods-RnDiffApp-RnDiffAppTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
++			);
++			runOnlyForDeploymentPostprocessing = 0;
++			shellPath = /bin/sh;
++			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RnDiffApp-RnDiffAppTests/Pods-RnDiffApp-RnDiffAppTests-frameworks.sh\"\n";
++			showEnvVarsInLog = 0;
++		};
++		C70BEE28A564E889B8CCEDEC /* [CP] Check Pods Manifest.lock */ = {
+ 			isa = PBXShellScriptBuildPhase;
+ 			buildActionMask = 2147483647;
+ 			files = (
+@@ -447,33 +319,62 @@
+ 			outputFileListPaths = (
+ 			);
+ 			outputPaths = (
+-				"$(DERIVED_FILE_DIR)/Pods-RnDiffApp-tvOS-checkManifestLockResult.txt",
++				"$(DERIVED_FILE_DIR)/Pods-RnDiffApp-checkManifestLockResult.txt",
+ 			);
+ 			runOnlyForDeploymentPostprocessing = 0;
+ 			shellPath = /bin/sh;
+ 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+ 			showEnvVarsInLog = 0;
+ 		};
+-		EDFA5103F265BAB3F09102E5 /* [CP] Check Pods Manifest.lock */ = {
++		D0A1525672FE856F18E5829F /* [CP] Embed Pods Frameworks */ = {
  			isa = PBXShellScriptBuildPhase;
  			buildActionMask = 2147483647;
  			files = (
@@ -2110,71 +2140,76 @@ index 38e68311c..cb8f5e8c5 100644
  			outputFileListPaths = (
 -			);
 -			outputPaths = (
--				"$(DERIVED_FILE_DIR)/Pods-RnDiffApp-tvOS-checkManifestLockResult.txt",
+-				"$(DERIVED_FILE_DIR)/Pods-RnDiffApp-tvOSTests-checkManifestLockResult.txt",
 +				"${PODS_ROOT}/Target Support Files/Pods-RnDiffApp/Pods-RnDiffApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
  			);
  			runOnlyForDeploymentPostprocessing = 0;
  			shellPath = /bin/sh;
 -			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 +			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RnDiffApp/Pods-RnDiffApp-frameworks.sh\"\n";
- 			showEnvVarsInLog = 0;
- 		};
--		EDFA5103F265BAB3F09102E5 /* [CP] Check Pods Manifest.lock */ = {
-+		8DBE55EE6E7CABBBF097A5DA /* [CP] Copy Pods Resources */ = {
- 			isa = PBXShellScriptBuildPhase;
- 			buildActionMask = 2147483647;
- 			files = (
- 			);
- 			inputFileListPaths = (
-+				"${PODS_ROOT}/Target Support Files/Pods-RnDiffApp/Pods-RnDiffApp-resources-${CONFIGURATION}-input-files.xcfilelist",
- 			);
--			inputPaths = (
--				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
--				"${PODS_ROOT}/Manifest.lock",
--			);
--			name = "[CP] Check Pods Manifest.lock";
++			showEnvVarsInLog = 0;
++		};
++		EAEA9511D18CEA5023F95752 /* [CP] Copy Pods Resources */ = {
++			isa = PBXShellScriptBuildPhase;
++			buildActionMask = 2147483647;
++			files = (
++			);
++			inputFileListPaths = (
++				"${PODS_ROOT}/Target Support Files/Pods-RnDiffApp-RnDiffAppTests/Pods-RnDiffApp-RnDiffAppTests-resources-${CONFIGURATION}-input-files.xcfilelist",
++			);
 +			name = "[CP] Copy Pods Resources";
- 			outputFileListPaths = (
--			);
--			outputPaths = (
--				"$(DERIVED_FILE_DIR)/Pods-RnDiffApp-tvOSTests-checkManifestLockResult.txt",
++			outputFileListPaths = (
++				"${PODS_ROOT}/Target Support Files/Pods-RnDiffApp-RnDiffAppTests/Pods-RnDiffApp-RnDiffAppTests-resources-${CONFIGURATION}-output-files.xcfilelist",
++			);
++			runOnlyForDeploymentPostprocessing = 0;
++			shellPath = /bin/sh;
++			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RnDiffApp-RnDiffAppTests/Pods-RnDiffApp-RnDiffAppTests-resources.sh\"\n";
++			showEnvVarsInLog = 0;
++		};
++		EDB36F37EA37ECDC065B074E /* [CP] Copy Pods Resources */ = {
++			isa = PBXShellScriptBuildPhase;
++			buildActionMask = 2147483647;
++			files = (
++			);
++			inputFileListPaths = (
++				"${PODS_ROOT}/Target Support Files/Pods-RnDiffApp/Pods-RnDiffApp-resources-${CONFIGURATION}-input-files.xcfilelist",
++			);
++			name = "[CP] Copy Pods Resources";
++			outputFileListPaths = (
 +				"${PODS_ROOT}/Target Support Files/Pods-RnDiffApp/Pods-RnDiffApp-resources-${CONFIGURATION}-output-files.xcfilelist",
- 			);
- 			runOnlyForDeploymentPostprocessing = 0;
- 			shellPath = /bin/sh;
--			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
++			);
++			runOnlyForDeploymentPostprocessing = 0;
++			shellPath = /bin/sh;
 +			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RnDiffApp/Pods-RnDiffApp-resources.sh\"\n";
  			showEnvVarsInLog = 0;
  		};
--		FD10A7F022414F080027D42C /* Start Packager */ = {
-+		B6CB9268306F99E9F86EBD1E /* [CP] Embed Pods Frameworks */ = {
- 			isa = PBXShellScriptBuildPhase;
- 			buildActionMask = 2147483647;
- 			files = (
- 			);
- 			inputFileListPaths = (
-+				"${PODS_ROOT}/Target Support Files/Pods-RnDiffApp-RnDiffAppTests/Pods-RnDiffApp-RnDiffAppTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
- 			);
--			inputPaths = (
--			);
--			name = "Start Packager";
-+			name = "[CP] Embed Pods Frameworks";
- 			outputFileListPaths = (
--			);
--			outputPaths = (
-+				"${PODS_ROOT}/Target Support Files/Pods-RnDiffApp-RnDiffAppTests/Pods-RnDiffApp-RnDiffAppTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
- 			);
- 			runOnlyForDeploymentPostprocessing = 0;
- 			shellPath = /bin/sh;
--			shellScript = "export RCT_METRO_PORT=\"${RCT_METRO_PORT:=8081}\"\necho \"export RCT_METRO_PORT=${RCT_METRO_PORT}\" > \"${SRCROOT}/../node_modules/react-native/scripts/.packager.env\"\nif [ -z \"${RCT_NO_LAUNCH_PACKAGER+xxx}\" ] ; then\n  if nc -w 5 -z localhost ${RCT_METRO_PORT} ; then\n    if ! curl -s \"http://localhost:${RCT_METRO_PORT}/status\" | grep -q \"packager-status:running\" ; then\n      echo \"Port ${RCT_METRO_PORT} already in use, packager is either not running or not running correctly\"\n      exit 2\n    fi\n  else\n    open \"$SRCROOT/../node_modules/react-native/scripts/launchPackager.command\" || echo \"Can't start packager automatically\"\n  fi\nfi\n";
-+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RnDiffApp-RnDiffAppTests/Pods-RnDiffApp-RnDiffAppTests-frameworks.sh\"\n";
+ 		FD10A7F022414F080027D42C /* Start Packager */ = {
+@@ -495,25 +396,6 @@
+ 			shellScript = "export RCT_METRO_PORT=\"${RCT_METRO_PORT:=8081}\"\necho \"export RCT_METRO_PORT=${RCT_METRO_PORT}\" > \"${SRCROOT}/../node_modules/react-native/scripts/.packager.env\"\nif [ -z \"${RCT_NO_LAUNCH_PACKAGER+xxx}\" ] ; then\n  if nc -w 5 -z localhost ${RCT_METRO_PORT} ; then\n    if ! curl -s \"http://localhost:${RCT_METRO_PORT}/status\" | grep -q \"packager-status:running\" ; then\n      echo \"Port ${RCT_METRO_PORT} already in use, packager is either not running or not running correctly\"\n      exit 2\n    fi\n  else\n    open \"$SRCROOT/../node_modules/react-native/scripts/launchPackager.command\" || echo \"Can't start packager automatically\"\n  fi\nfi\n";
  			showEnvVarsInLog = 0;
  		};
 -		FD10A7F122414F3F0027D42C /* Start Packager */ = {
-+		FD10A7F022414F080027D42C /* Start Packager */ = {
- 			isa = PBXShellScriptBuildPhase;
- 			buildActionMask = 2147483647;
- 			files = (
+-			isa = PBXShellScriptBuildPhase;
+-			buildActionMask = 2147483647;
+-			files = (
+-			);
+-			inputFileListPaths = (
+-			);
+-			inputPaths = (
+-			);
+-			name = "Start Packager";
+-			outputFileListPaths = (
+-			);
+-			outputPaths = (
+-			);
+-			runOnlyForDeploymentPostprocessing = 0;
+-			shellPath = /bin/sh;
+-			shellScript = "export RCT_METRO_PORT=\"${RCT_METRO_PORT:=8081}\"\necho \"export RCT_METRO_PORT=${RCT_METRO_PORT}\" > \"${SRCROOT}/../node_modules/react-native/scripts/.packager.env\"\nif [ -z \"${RCT_NO_LAUNCH_PACKAGER+xxx}\" ] ; then\n  if nc -w 5 -z localhost ${RCT_METRO_PORT} ; then\n    if ! curl -s \"http://localhost:${RCT_METRO_PORT}/status\" | grep -q \"packager-status:running\" ; then\n      echo \"Port ${RCT_METRO_PORT} already in use, packager is either not running or not running correctly\"\n      exit 2\n    fi\n  else\n    open \"$SRCROOT/../node_modules/react-native/scripts/launchPackager.command\" || echo \"Can't start packager automatically\"\n  fi\nfi\n";
+-			showEnvVarsInLog = 0;
+-		};
+ /* End PBXShellScriptBuildPhase section */
+ 
+ /* Begin PBXSourcesBuildPhase section */
 @@ -534,23 +416,6 @@
  			);
  			runOnlyForDeploymentPostprocessing = 0;
@@ -2226,7 +2261,7 @@ index 38e68311c..cb8f5e8c5 100644
  		00E356F61AD99517003FC87E /* Debug */ = {
  			isa = XCBuildConfiguration;
 -			baseConfigurationReference = 04A1A0764B621DAADCCF9C84 /* Pods-RnDiffApp-RnDiffAppTests.debug.xcconfig */;
-+			baseConfigurationReference = 726D0C184EA633DB3F43BB74 /* Pods-RnDiffApp-RnDiffAppTests.debug.xcconfig */;
++			baseConfigurationReference = A36156200A52224E6992E041 /* Pods-RnDiffApp-RnDiffAppTests.debug.xcconfig */;
  			buildSettings = {
  				BUNDLE_LOADER = "$(TEST_HOST)";
  				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2250,7 +2285,7 @@ index 38e68311c..cb8f5e8c5 100644
  		00E356F71AD99517003FC87E /* Release */ = {
  			isa = XCBuildConfiguration;
 -			baseConfigurationReference = 31B1C02C9A28EDB7B30C6896 /* Pods-RnDiffApp-RnDiffAppTests.release.xcconfig */;
-+			baseConfigurationReference = 781280C0B14A16637BD70EE9 /* Pods-RnDiffApp-RnDiffAppTests.release.xcconfig */;
++			baseConfigurationReference = 33813EF42DD024A9164E7225 /* Pods-RnDiffApp-RnDiffAppTests.release.xcconfig */;
  			buildSettings = {
  				BUNDLE_LOADER = "$(TEST_HOST)";
  				COPY_PHASE_STRIP = NO;
@@ -2271,21 +2306,22 @@ index 38e68311c..cb8f5e8c5 100644
  		13B07F941A680F5B00A75B9A /* Debug */ = {
  			isa = XCBuildConfiguration;
 -			baseConfigurationReference = 6E9E14A2EADC26747EC36AE6 /* Pods-RnDiffApp.debug.xcconfig */;
-+			baseConfigurationReference = 618E49A71BB7628ECF5C445C /* Pods-RnDiffApp.debug.xcconfig */;
++			baseConfigurationReference = AC9C31B0A485CD3FED8258FD /* Pods-RnDiffApp.debug.xcconfig */;
  			buildSettings = {
  				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
  				CLANG_ENABLE_MODULES = YES;
  				CURRENT_PROJECT_VERSION = 1;
  				ENABLE_BITCODE = NO;
 -				GCC_PREPROCESSOR_DEFINITIONS = (
-+				INFOPLIST_FILE = RnDiffApp/Info.plist;
-+				LD_RUNPATH_SEARCH_PATHS = (
- 					"$(inherited)",
+-					"$(inherited)",
 -					"FB_SONARKIT_ENABLED=1",
-+					"@executable_path/Frameworks",
- 				);
--				INFOPLIST_FILE = RnDiffApp/Info.plist;
+-				);
+ 				INFOPLIST_FILE = RnDiffApp/Info.plist;
 -				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
++				LD_RUNPATH_SEARCH_PATHS = (
++					"$(inherited)",
++					"@executable_path/Frameworks",
++				);
  				OTHER_LDFLAGS = (
  					"$(inherited)",
  					"-ObjC",
@@ -2294,7 +2330,7 @@ index 38e68311c..cb8f5e8c5 100644
  		13B07F951A680F5B00A75B9A /* Release */ = {
  			isa = XCBuildConfiguration;
 -			baseConfigurationReference = 261AA02F069707392054BE8D /* Pods-RnDiffApp.release.xcconfig */;
-+			baseConfigurationReference = 1815FF863A828443D734E8E6 /* Pods-RnDiffApp.release.xcconfig */;
++			baseConfigurationReference = 54A696DD9F0C20CABD2A7F62 /* Pods-RnDiffApp.release.xcconfig */;
  			buildSettings = {
  				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
  				CLANG_ENABLE_MODULES = YES;
@@ -2779,9 +2815,16 @@ index 13a964217..e91aba937 100644
      }),
    },
 diff --git a/RnDiffApp/package.json b/RnDiffApp/package.json
-index d5f6eb26a..60a3eae63 100644
+index d5f6eb26a..81abae44c 100644
 --- a/RnDiffApp/package.json
 +++ b/RnDiffApp/package.json
+@@ -1,5 +1,5 @@
+ {
+-  "name": "RnDiffApp",
++  "name": "rndiffapp",
+   "version": "0.0.1",
+   "private": true,
+   "scripts": {
 @@ -10,18 +10,18 @@
      "lint": "eslint ."
    },
